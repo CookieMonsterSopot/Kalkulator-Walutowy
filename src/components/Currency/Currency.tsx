@@ -10,10 +10,11 @@ const Currency = () => {
   const [inSelected, setInSelected] = useState("chf");
   const [outSelected, setOutSelected] = useState("usd");
 
-  const [startAmount, setStartAmuount] = useState("0");
+  const [startAmount, setStartAmuount] = useState("0"); // start amount probably should be null or empty string
 
   const [inCurrency, setInCurrency] = useState(0); // change name to firstCurrencyValueInPLN
   useEffect(() => {
+    // request should not be fired for when component is in insitial state
     axios
       .get(`http://api.nbp.pl/api/exchangerates/rates/a/${inSelected}/?`)
       .then((inCurrencyData) =>
