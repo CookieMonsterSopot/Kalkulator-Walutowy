@@ -1,26 +1,11 @@
 import axios from "axios";
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 import CurrencySelector from "./CurrencySelector";
 
 const Currency = () => {
-  const inOptions = [
-    { value: "chf", text: "Frank Szwajcarski" },
-    { value: "usd", text: "Dolar Amerykański" },
-    { value: "eur", text: "Euro" },
-    { value: "gbp", text: "Funt Szterling" },
-    { value: "jpy", text: "Jen" },
-  ];
-
-  const outOptions = [
-    { value: "usd", text: "Dolar Amerykański" },
-    { value: "chf", text: "Frank Szwajcarski" },
-    { value: "eur", text: "Euro" },
-    { value: "gbp", text: "Funt Szterling" },
-    { value: "jpy", text: "Jen" },
-  ];
-  const [inSelected, setInSelected] = useState(inOptions[0].value);
-  const [outSelected, setOutSelected] = useState(outOptions[0].value);
+  const [inSelected, setInSelected] = useState("chf");
+  const [outSelected, setOutSelected] = useState("usd");
 
   const [startAmount, setStartAmuount] = useState("0");
 
@@ -31,7 +16,7 @@ const Currency = () => {
       .then((inCurrencyData) =>
         setInCurrency(inCurrencyData.data.rates[0].mid)
       );
-  }, [inOptions]);
+  }, [inSelected]);
 
   const [outCurrency, setOutCurrency] = useState(0);
   useEffect(() => {
@@ -40,7 +25,7 @@ const Currency = () => {
       .then((outCurrencyData) =>
         setOutCurrency(outCurrencyData.data.rates[0].mid)
       );
-  }, [outOptions]);
+  }, [outSelected]);
 
   console.log(inSelected);
 
